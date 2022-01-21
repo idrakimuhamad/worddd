@@ -3,13 +3,18 @@ import { WORD_LIST } from './words'
 
 const OPERATOR = ['enter', 'delete']
 
-function Column({ index, isCurrentRow, letter, secretWord }) {
+function Column({ index, isCurrentRow, letter, secretWord, otherAttempts }) {
   function getBgColor() {
     const correctLetter = secretWord[index]
     
     if (!isCurrentRow) {
       if (secretWord.indexOf(letter) === -1) return 'bg-neutral-500'
       if (letter === correctLetter) return "bg-green-600"
+      
+      if (letter) {
+        // secretWord.indexOf(letter) > -1
+      }
+      if (letter && secretWord.indexOf(letter) > -1) return 'bg-yellow-300'
     }
     return 'bg-white'
   }
@@ -92,6 +97,8 @@ function Keyboard({ onKeyboardTyped }) {
   )
 }
 
+const randomIndex = Math.floor(Math.random() * WORD_LIST.length)
+
 function App() {
   const [currentRowColumn, setRowColumn] = useState({
     row: 0,
@@ -100,9 +107,7 @@ function App() {
   const [rowLetters, setLetters] = useState([])
   const [isDone, setDone] = useState(false)
   const [isWin, setWin] = useState(false)
-  const randomIndex = Math.floor(Math.random() * WORD_LIST.length)
-  const secretWord = WORD_LIST[0]
-  // const secretWord = WORD_LIST[randomIndex]
+  const secretWord = WORD_LIST[randomIndex]
   const rows = Array(6).fill("")
 
   function handleKeyboardTyped(code) {
@@ -174,7 +179,8 @@ function App() {
         }
 
 
-        // check the words with the list of words to check if its a valid word
+        // naive solution to check the words 
+        // with the list of words to check if its a valid word
         if (!WORD_LIST.includes(joinLetters)) {
           alert("Nope. Can't find that word.")
         } else {
@@ -204,6 +210,8 @@ function App() {
     setDone(false)
     setWin(false)
   }
+
+  console.log('secretWord', secretWord);
 
   return (
     <div className="flex flex-col min-h-full justify-between container mx-auto py-6">
