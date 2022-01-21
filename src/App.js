@@ -6,14 +6,15 @@ const OPERATOR = ['enter', 'delete']
 function Column({ index, isCurrentRow, letter, secretWord, otherAttempts }) {
   function getBgColor() {
     const correctLetter = secretWord[index]
+
     
     if (!isCurrentRow) {
       if (secretWord.indexOf(letter) === -1) return 'bg-neutral-500'
       if (letter === correctLetter) return "bg-green-600"
       
-      if (letter) {
+      // if (letter) {
         // secretWord.indexOf(letter) > -1
-      }
+      // }
       if (letter && secretWord.indexOf(letter) > -1) return 'bg-yellow-300'
     }
     return 'bg-white'
@@ -211,7 +212,6 @@ function App() {
     setWin(false)
   }
 
-  console.log('secretWord', secretWord);
 
   return (
     <div className="flex flex-col min-h-full justify-between container mx-auto py-6">
