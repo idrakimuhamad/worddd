@@ -151,7 +151,7 @@ function App() {
           setRowColumn((current) => {
             return {
               ...current,
-              column: current.column++,
+              column: current.column + 1,
             };
           });
 
@@ -193,12 +193,14 @@ function App() {
 
         setRowColumn((current) => ({
           ...current,
-          column: current.column--,
+          column: current.column - 1,
         }));
       }
 
       if (code === "enter") {
         const joinLetters = rowLetters[currentRowColumn.row]?.join("") ?? "";
+
+        console.log('joinLetters', joinLetters);
 
         // must fill all 5 column before can be done
         if (joinLetters.length < 5) {
@@ -212,7 +214,7 @@ function App() {
         } else {
           setRowColumn((current) => {
             return {
-              row: current.row++,
+              row: current.row + 1,
               column: 0,
             };
           });
