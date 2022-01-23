@@ -173,28 +173,30 @@ function App() {
       }
 
       if (code === "delete") {
-        // delete the last letter in current row
-        setLetters((prevState) => {
-          const lastRow = prevState.length - 1;
-          const mutateLetters = prevState.map((letters, index) => {
-            if (index === lastRow) {
-              const spliceLastItemColumn = [
-                ...letters.slice(0, letters.length - 1),
-              ];
-              return [...spliceLastItemColumn];
-            }
+        if (rowLetters[currentRowColumn.row]?.length) {
+          // delete the last letter in current row
+          setLetters((prevState) => {
+            const lastRow = prevState.length - 1;
+            const mutateLetters = prevState.map((letters, index) => {
+              if (index === lastRow) {
+                const spliceLastItemColumn = [
+                  ...letters.slice(0, letters.length - 1),
+                ];
+                return [...spliceLastItemColumn];
+              }
 
-            return letters;
+              return letters;
+            });
+
+            // remove empty array
+            return mutateLetters.filter((letter) => letter.length);
           });
 
-          // remove empty array
-          return mutateLetters.filter((letter) => letter.length);
-        });
-
-        setRowColumn((current) => ({
-          ...current,
-          column: current.column - 1,
-        }));
+          setRowColumn((current) => ({
+            ...current,
+            column: current.column - 1,
+          }));
+        }        
       }
 
       if (code === "enter") {
