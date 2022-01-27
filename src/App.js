@@ -162,7 +162,6 @@ function App() {
   const checkRowLetters = function(attempt, secret) {
     // turn the attempts into array
     const attemptsArray = attempt.split('')
-    const secretsArray = secret.split('')
 
     // the first array check to indicate if the attempt word is correct and found
     const correctCheck = Array(secret.length).fill(true)
