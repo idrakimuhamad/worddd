@@ -187,14 +187,16 @@ function App() {
     attemptsArray.forEach((letter, i) => {
         // this haven't been found yet
         if (correctCheck[i]) {
-            // go each secret and find this letter
-            secretsArray.some((word, idx) => {
-                if (existenceCheck[idx] && word === letter) {
-                    status[i] = EXISTS
-                    existenceCheck[idx] = false
-                    return true
-                }
-            })
+          // go each secret and find this letter
+          for (let idx = 0; idx < secret.length; idx++) {
+            const secretWord = secret[idx];
+
+            if (existenceCheck[idx] && secretWord === letter) {
+              status[i] = EXISTS
+              existenceCheck[idx] = false
+              break
+            }
+          }
         }
     })
 
